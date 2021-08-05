@@ -15,7 +15,7 @@ const App = () => {
     )
       .then((res) => {
         if (res.ok) {
-          console.log(res.status);
+          // console.log(res.status);
           return res.json();
         } else {
           if (res.status === 404) {
@@ -27,7 +27,7 @@ const App = () => {
       })
       .then((object) => {
         setWeather(object);
-        console.log(weather);
+        // console.log(weather);
       })
       .catch((error) => console.log(error));
     fetch(
@@ -41,7 +41,7 @@ const App = () => {
         }
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setPhotos(data?.results[0]?.urls?.raw);
       })
       .catch((error) => console.log(error));
@@ -49,7 +49,24 @@ const App = () => {
 
   return (
     <div className='app'>
-      <h1>Hello</h1>
+      <div className='wrapper'>
+        <div className='search'>
+          <input
+            type='text'
+            value={locations}
+            onChange={(e) => setLocations(e.target.value)}
+            placeholder='Enter location'
+            className='location_input'
+          />
+          <button className='location_searcher' onClick={ifClicked}>
+            Search Location
+          </button>
+        </div>
+        <div className='app_data'>
+          <p className='temp'>Current Temparature: {weather?.main?.temp}</p>
+        </div>
+        <img className='app_image' src={photos} alt='' />
+      </div>
     </div>
   );
 };
